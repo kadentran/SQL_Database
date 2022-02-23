@@ -1,0 +1,11 @@
+Open command prompt
+Cd to directory that contains Index.java and test data files
+
+Run these commands:
+javac Index.java
+java Index -c CS6360Asg5TestDataA.TXT CS6360Asg5TestDataA.IDX 4
+java Index -l CS6360Asg5TestDataA.TXT CS6360Asg5TestDataA.IDX 4
+
+javac Index.java
+java Index -c CS6360Asg5TestDataB.TXT CS6360Asg5TestDataB.IDX 4
+java Index -l CS6360Asg5TestDataB.TXT CS6360Asg5TestDataB.IDX 4

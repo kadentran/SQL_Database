@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0074)https://personal.utdallas.edu/~John.Cole/ProgrammingTips/BinaryIO-CPP.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Binary I/O in C++</title>
+<style type="text/css">
+.auto-style1 {
+	font-family: "Courier New", Courier, monospace;
+}
+</style>
+</head>
+<body>/<span class="auto-style1">******************************************************************************</span><br class="auto-style1">
+ <span class="auto-style1">* Random-access file example program in C++.</span><br class="auto-style1">
+ *<br class="auto-style1">
+ <span class="auto-style1">* This shows how to treat a text file as binary and access records within</span><br class="auto-style1">
+ <span class="auto-style1">* it.  This reads only the first two records from a 1K block, keeping track</span><br class="auto-style1">
+ <span class="auto-style1">* of where each record starts and ends in the buffer.</span><br class="auto-style1">
+ *<br class="auto-style1">
+ <span class="auto-style1">* Written by John Cole at The University of Texas at Dallas on November 1,</span><br class="auto-style1">
+ <span class="auto-style1">* 2016.  Copy, adapt, and use this code freely.</span><br class="auto-style1">
+ <span class="auto-style1">******************************************************************************/</span><br class="auto-style1">
+<br class="auto-style1">
+<span class="auto-style1">#include "stdafx.h"</span><br class="auto-style1">
+<span class="auto-style1">#include &lt;stdio.h&gt;<br class="auto-style1">
+<span class="auto-style1">#include &lt;io.h&gt;</span><io.h><br class="auto-style1">
+<span class="auto-style1">#include &lt;iostream&gt; </span> <iostream><br class="auto-style1">
+<span class="auto-style1">#include &lt;fstream&gt;<br class="auto-style1">
+<br class="auto-style1">
+<span class="auto-style1">using namespace std;</span><br class="auto-style1">
+<br class="auto-style1"><span class="auto-style1">int main()</span><br class="auto-style1">
+<span class="auto-style1">&nbsp;{<br>
+&nbsp;fstream f;</span><br class="auto-style1">
+  &nbsp;char buffer[1024];<br class="auto-style1">
+  &nbsp;int recptr = 0;<br class="auto-style1">
+  &nbsp;int startptr = 0;<br class="auto-style1">
+  &nbsp;char record1[100];<br class="auto-style1">
+  &nbsp;char record2[100];<br class="auto-style1">
+<br class="auto-style1">
+  &nbsp;// Poor practice here, hard-coding the fully-qualified path of a file.<br class="auto-style1">
+  &nbsp;f.open("H:\\Classes\\2016Fall\\CS6360Fall2016<a href="https://personal.utdallas.edu/CS6360Asg5TestData.txt%22,%20ios::in,%20ios::binary">\\CS6360Asg5TestData.txt", ios::in, ios::binary</a>);<br class="auto-style1">
+  &nbsp;f.read(buffer, 1024);<br>
+<br class="auto-style1">
+  &nbsp;// Find the end of the first record.<br class="auto-style1">
+  &nbsp;while (buffer[recptr] != '\n')<br>
+&nbsp;
+    recptr++;<br>
+&nbsp;cout &lt;&lt; "Record1 is " &lt;&lt; recptr &lt;&lt; "bytes long" &lt;&lt; endl;<br>
+&nbsp;strncpy_s(record1, &amp;buffer[startptr], recptr);<br>
+&nbsp;record1[recptr] = 0;
+  cout &lt;&lt; "Record1: " &lt;&lt; record1 &lt;&lt; endl;<br>
+<br>
+&nbsp;// Move past the NL character, then save that as the start of the second line.<br>
+&nbsp;recptr++;<br>
+&nbsp;startptr = recptr;<br>
+&nbsp;// Find the end of the second record.<br>
+&nbsp;while (buffer[recptr] != '\n')<br>
+&nbsp;
+    recptr++;<br>
+&nbsp;cout &lt;&lt; "Record2 is " &lt;&lt; recptr &lt;&lt; "bytes long" &lt;&lt; endl;<br>
+&nbsp;strncpy_s(record2, &amp;buffer[startptr], recptr-startptr);<br>
+&nbsp;record2[recptr] = 0;<br>
+&nbsp;cout &lt;&lt; "Record2: " &lt;&lt; record2 &lt;&lt; endl;<br>
+<br>
+&nbsp;system("pause");<br>
+&nbsp;f.close();
+    <br>
+&nbsp;return 0;<br>
+&nbsp;} 
+
+
+
+
+
+
+
+</span></iostream></io.h></span></body></html>
